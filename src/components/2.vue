@@ -1,5 +1,5 @@
 <template>
-  <Nav />
+  
   <div>pinia(代替vuex)</div>
 <button @click="pi_count.increment">{{pi_count.count}}</button>
 <span>{{ pi_count.doubleCount }}</span>
@@ -17,7 +17,7 @@ export default {
 import { useCounterStore } from '@/stores/counter';
 import { storeToRefs } from 'pinia';
 import { ref,onMounted } from 'vue'
-import Nav from './nav/nav.vue'
+
 import { getCategory } from '@/apis/api.js'
 onMounted(() => {
   getCategory().then(res => {

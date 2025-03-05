@@ -1,22 +1,27 @@
 <template>
- 
-  <home></home>
+  <!-- 一级路由出口 -->
+   <div class="test">test scss</div>
+  <RouterView class="view"> </RouterView>
+  <!-- <home></home> -->
 </template>
 
 <script setup>
 // import { RouterLink, RouterView } from 'vue-router'
-import home from './views/home.vue'
+import home from '@/views/home.vue'
 import { ref } from 'vue'
 // import { useRoute } from 'vue-router'
 
 // const route = useRoute()
 // const id = route.params.id
 </script>
-<style scoped>
+<style scoped lang="scss">
+.test {
+  color: $xtxColor;
+}
 body {
   margin: 0;
   padding: 0;
-  height: 100vh; /* 设置 body 高度为视口高度的 100% */
+  height: 100%; /* 设置 body 高度为视口高度的 100% */
   display: flex;
   justify-content: center; /* 水平居中 */
   align-items: center; /* 垂直居中 */

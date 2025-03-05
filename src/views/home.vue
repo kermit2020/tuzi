@@ -1,16 +1,24 @@
 
 <template>
   <div class="warpper">
-    <!-- <nav> -->
-      <!-- <RouterLink v-for="id1 in [1, 2, 3, 4]" :key="id1" :to="{path:`/item/${id1}`,params:{id:`${id1}`}}">{{ id1 }}</RouterLink> -->
-      <RouterView class="view"> </RouterView>
+    <!-- <nav>
+      222 -->
+      222
+      <nav2></nav2>
+      <RouterView class="view">
+        
+      </RouterView> 
      
     <!-- </nav> -->
   </div>
 </template>
 <script>
+import nav2 from '../components/nav/nav.vue'
 export default {
-  name: 'Home',
+  // name: 'home',
+  components: {
+    nav2
+  },
   data() {
     return {
       msg: 'Welcome to Your Vue.js App'

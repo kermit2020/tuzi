@@ -1,14 +1,16 @@
 <template>
   <div class="nav">
-    <template v-for="id1 in [1, 2, 3, 4]" :key="id1">
+    <template v-for="id1 in [1, 2, 3, 4, 5]" :key="id1">
       <RouterLink :to="{ path: `/item/${id1}` }" class="page">{{ id1 }}</RouterLink>
     </template>
   </div>
 </template>
 <style>
-.nav{
+ .nav{
   /* position:absolute; */
   /* display:flex; */
+  /* display: block;
+  height: 100px !important; */
   margin-top: 10px;
   text-align: center;
 }

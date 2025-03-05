@@ -1,11 +1,11 @@
 <template>
   <div>
-    <Nav />
+    
     <button @click="addCount">{{count}}</button>
   </div>
 </template>
 <script setup>
-import Nav from './nav/nav.vue'
+
 import {ref} from 'vue'
 const count=ref(0)
 function addCount(){

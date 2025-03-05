@@ -1,7 +1,7 @@
 <template>
   <div class="k01">
     <div>
-      <Nav />
+      <!-- <Nav /> -->
       <div>js01数据类型</div>
       <div>
         <div>简单：string,number,boolean,undefined,null</div>
