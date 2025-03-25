@@ -8,7 +8,7 @@ export const s_layout = defineStore("s_layout", () => {
   const getNavList = async () => {
     const res = await getCategory();
     navList.value = res.result;
-    console.log('res',res);
+    console.log('res_layout_nav',res);
     
   };
   return { navList, getNavList };
