@@ -1,7 +1,3 @@
-<script setup>
-// import LayoutHeaderUl from './LayoutHeaderUl.vue'
-// import HeaderCart from './HeaderCart.vue'
-</script>
 
 <template>
     <header class='app-header'>
@@ -10,7 +6,7 @@
                 <RouterLink to="/">小兔鲜</RouterLink>
             </h1>
 
-            <!-- <LayoutHeaderUl /> -->
+            <LayoutHeaderUI />
             <div class="search">
                 <i class="iconfont icon-search"></i>
                 <input type="text" placeholder="搜一搜">
@@ -20,6 +16,9 @@
         </div>
     </header>
 </template>
+  <script setup>
+   import LayoutHeaderUI from './LayoutHeaderUI.vue'
+  </script>
 
 
 <style scoped lang='scss'>

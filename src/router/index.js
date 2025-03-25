@@ -10,7 +10,35 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: '/', redirect: '/home', component: app },
+    
+    
     {
+      path: '/Layout',
+     
+      component: Layout,
+      children: [
+        {
+          path: '',
+
+          component: () => {
+            return import(`@/views/Home/index.vue`)
+          }
+        },
+        {
+          path: 'category',
+          component: () => {
+            return import(`@/views/Category/index.vue`)
+          }
+        }
+      ]
+    },
+    {
+      path: '/login',
+
+      component: () => {
+        return import(`@/views/Login/index.vue`)
+      }
+    },{
       path: '/home',
       // name: 'home',
       component: home,
@@ -70,34 +98,6 @@ const router = createRouter({
         }
       ]
     },
-    
-    {
-      path: '/Layout',
-     
-      component: Layout,
-      children: [
-        {
-          path: '',
-
-          component: () => {
-            return import(`@/views/Home/index.vue`)
-          }
-        },
-        {
-          path: 'category',
-          component: () => {
-            return import(`@/views/Category/index.vue`)
-          }
-        }
-      ]
-    },
-    {
-      path: '/login',
-
-      component: () => {
-        return import(`@/views/Login/index.vue`)
-      }
-    }
     // {
     //   path: '/item/:id',
     //   name: 'item',

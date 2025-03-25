@@ -3,7 +3,7 @@
   <div class="warpper">
     <!-- <nav>
       222 -->
-      222
+      
       <nav2></nav2>
       <RouterView class="view">
         

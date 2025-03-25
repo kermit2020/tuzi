@@ -1,6 +1,6 @@
 <template>
   <!-- 一级路由出口 -->
-   <div class="test">test scss</div>
+   <!-- <div class="test">test scss</div> -->
   <RouterView class="view"> </RouterView>
   <!-- <home></home> -->
 </template>
