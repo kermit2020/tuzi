@@ -8,12 +8,10 @@
     <home_hot></home_hot>
     <home_product></home_product>
     <!-- 封装面板组件 -->
-    <home_repanel title="新鲜好物" subtitle="新鲜出炉 品质靠谱">
-      <div>这里是新鲜好物的描述</div>
-    </home_repanel>
-    <home_repanel title="人气推荐" subtitle="人气推荐 物美价廉">
+    
+    <!-- <home_repanel title="人气推荐" subtitle="人气推荐 物美价廉">
       <div>没错是人气推荐的描述</div>
-    </home_repanel>
+    </home_repanel> -->
 </template>
 
 <script setup>

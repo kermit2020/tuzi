@@ -6,3 +6,15 @@ export function getBanner() {
     url:'home/banner'
   })
 }
+export function getNew() {
+  return http({
+    method: 'GET',
+    url:'home/new'
+  })
+}
+export function getHot() {
+  return http({
+    method: 'GET',
+    url:'home/hot'
+  })
+}
