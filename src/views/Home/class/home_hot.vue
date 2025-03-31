@@ -7,7 +7,7 @@ const d_home = s_home()
 d_home.getHotList()
 </script>
 <template>
-  <HomePanel title="人气推荐" sub-title="人气爆款 不容错过">
+  <home_repanel title="人气推荐" subtitle="人气爆款 不容错过">
       <ul class="goods-list">
         <li v-for="(v,i) in d_home.hotList" :key="v.id">
           <RouterLink to="/">
@@ -16,8 +16,9 @@ d_home.getHotList()
             <p class="desc">{{ v.alt }}</p>
           </RouterLink>
         </li>
+        
       </ul>
-  </HomePanel>
+  </home_repanel>
 </template>
 
 <style scoped lang='scss'>
