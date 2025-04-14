@@ -10,14 +10,14 @@ export const lazyPlugin = {
         //el:元素,=img
         //binding:指令值binding.value,=url
         console.log(el, binding.value)
-        useIntersectionObserver(el, ([{ isIntersecting }], observerElement) => {
+        const { stop } = useIntersectionObserver(el, ([{ isIntersecting }]) => {
           //isIntersecting元素是否进入区域
           console.log(isIntersecting)
           if (isIntersecting) {
             // 进入视口区域
             el.src = binding.value
             // 停止监听
-            // observerElement.stop()
+            stop()
           }
         })
       }

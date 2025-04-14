@@ -1,12 +1,13 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { getBanner,getNew,getHot } from "@/apis/home";
+import { getBanner,getNew,getHot, getProduct } from "@/apis/home";
 
 export const s_home = defineStore("s_home", () => {
   // 导航栏数据
   const bannerList = ref([]);
   const newList = ref([]);
   const hotList = ref([]);
+  const goodsList = ref([]);
   const getBannerList = async () => {
     const res = await getBanner();
     bannerList.value = res.result;
@@ -25,5 +26,11 @@ export const s_home = defineStore("s_home", () => {
     console.log('res_home_hot',res);
     
   };
-  return { bannerList,newList,hotList, getBannerList,getNewList,getHotList };
+  const getGoodsList = async () => {
+    const res = await getProduct();
+    goodsList.value = res.result;
+    console.log('res_home_goods',res);
+    
+  };
+  return { bannerList,newList,hotList,goodsList, getBannerList,getNewList,getHotList,getGoodsList };
 })

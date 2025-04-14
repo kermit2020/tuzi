@@ -18,3 +18,9 @@ export function getHot() {
     url:'home/hot'
   })
 }
+export function getProduct() {
+  return http({
+    method: 'GET',
+    url:'home/goods'
+  })
+}

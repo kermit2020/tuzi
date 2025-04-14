@@ -5,7 +5,7 @@
     <ul class="goods-list">
     <li v-for="(v,i) in d_home.newList" :key="v.id">
       <RouterLink to="/">
-        <img :src="v.picture" alt="" />
+        <img v-img-lazy="v.picture" alt="" />
         <p class="name">{{ v.name }}</p>
         <p class="price">&yen;{{ v.price }}</p>
       </RouterLink>
