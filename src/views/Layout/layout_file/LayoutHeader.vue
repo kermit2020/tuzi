@@ -3,7 +3,7 @@
     <header class='app-header'>
         <div class="container">
             <h1 class="logo">
-                <RouterLink to="/">小兔鲜</RouterLink>
+                <RouterLink to="/Layout">小兔鲜</RouterLink>
             </h1>
 
             <LayoutHeaderUI />

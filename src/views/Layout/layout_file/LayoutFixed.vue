@@ -24,7 +24,7 @@ const { y } = useScroll(window)
             <!-- 导航区域 -->
             <ul class="app-header-nav">
                 <li class="home">
-                    <RouterLink to="/">首页</RouterLink>
+                    <RouterLink to="/Layout">首页</RouterLink>
                 </li>
                 <li class="home" v-for="v in d_layout.navList" :key="v.id">
                     <RouterLink active-class="active" :to="`/category/${v.id}`">{{ v.name }}</RouterLink>

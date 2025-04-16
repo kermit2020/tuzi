@@ -1,22 +1,17 @@
 <template>
   <div class="home-product">
-    <home_repanel :title="v1.name" v-for="(v1,i1) in d_home.goodsList" :key="v1.id">
+    <home_repanel :title="v1.name" v-for="(v1, i1) in d_home.goodsList" :key="v1.id">
       <div class="box">
         <RouterLink class="cover" to="/">
-          <img v-img-lazy="i1===3?'http://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-05-06/d38a73b8-cd03-48aa-a60b-e7c4e16667ed.png':v1.picture" />
+          <img v-img-lazy="i1 === 3 ? 'http://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-05-06/d38a73b8-cd03-48aa-a60b-e7c4e16667ed.png' : v1.picture" />
           <strong class="label">
             <span>{{ v1.name }}馆</span>
             <span>{{ v1.saleInfo }}</span>
           </strong>
         </RouterLink>
         <ul class="goods-list">
-          <li v-for="v2 in v1.goods" :key="v2.id">
-            <RouterLink to="/" class="goods-item">
-              <img v-img-lazy="v2.picture" alt="" />
-              <p class="name ellipsis">{{ v2.name }}</p>
-              <p class="desc ellipsis">{{ v2.desc }}</p>
-              <p class="price">&yen;{{ v2.price }}</p>
-            </RouterLink>
+          <li v-for="v2 in v1.goods" :key="v1.id">
+            <goods_item :goods="v2" />
           </li>
         </ul>
       </div>
@@ -25,8 +20,8 @@
 </template>
 
 <script setup>
-
 import home_repanel from './home_repanel.vue'
+import goods_item from './goods_item.vue'
 import { s_home } from '@/stores/home'
 import { onMounted, nextTick } from 'vue'
 
@@ -34,7 +29,7 @@ const d_home = s_home()
 d_home.getGoodsList()
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 .home-product {
   background: #fff;
   margin-top: 20px;
@@ -121,41 +116,7 @@ d_home.getGoodsList()
       }
     }
 
-    .goods-item {
-      display: block;
-      width: 220px;
-      padding: 20px 30px;
-      text-align: center;
-      transition: all .5s;
-
-      &:hover {
-        transform: translate3d(0, -3px, 0);
-        box-shadow: 0 3px 8px rgb(0 0 0 / 20%);
-      }
-
-      img {
-        width: 160px;
-        height: 160px;
-      }
-
-      p {
-        padding-top: 10px;
-      }
-
-      .name {
-        font-size: 16px;
-      }
-
-      .desc {
-        color: #999;
-        height: 29px;
-      }
-
-      .price {
-        color: $priceColor;
-        font-size: 20px;
-      }
-    }
+   
   }
 }
 </style>

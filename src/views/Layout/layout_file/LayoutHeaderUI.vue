@@ -2,10 +2,10 @@
   <div>
     <ul class="app-header-nav">
       <li class="home">
-        <router-link to="/">首页</router-link>
+        <router-link to="/Layout">首页</router-link>
       </li>
       <li class="home" v-for="(v, i) in d_layout.navList" :key="i">
-        <router-link to="/">{{ v.name }}</router-link>
+        <router-link :to="`/category/${v.id}`">{{ v.name }}</router-link>
       </li>
     </ul>
   </div>
