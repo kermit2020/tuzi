@@ -8,28 +8,28 @@ export const s_home = defineStore("s_home", () => {
   const newList = ref([]);
   const hotList = ref([]);
   const goodsList = ref([]);
-  const getBannerList = async () => {
-    const res = await getBanner();
+  const getBannerList = async (parmas) => {
+    const res = await getBanner(parmas);
     bannerList.value = res.result;
-    console.log('res_home_banner',res);
+    // console.log('res_home_banner',res);
     
   };
   const getNewList = async () => {
     const res = await getNew();
     newList.value = res.result;
-    console.log('res_home_new',res);
+    // console.log('res_home_new',res);
     
   };
   const getHotList = async () => {
     const res = await getHot();
     hotList.value = res.result;
-    console.log('res_home_hot',res);
+    // console.log('res_home_hot',res);
     
   };
   const getGoodsList = async () => {
     const res = await getProduct();
     goodsList.value = res.result;
-    console.log('res_home_goods',res);
+    // console.log('res_home_goods',res);
     
   };
   return { bannerList,newList,hotList,goodsList, getBannerList,getNewList,getHotList,getGoodsList };

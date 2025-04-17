@@ -5,195 +5,201 @@ import { useScroll } from '@vueuse/core'
 
 // 封装请求
 import { s_layout } from '@/stores/layout'
-import { onMounted, nextTick } from 'vue'
+import { onMounted, nextTick, ref } from 'vue'
 
 const d_layout = s_layout()
 
-
 // 纵向滚动的距离
 const { y } = useScroll(window)
-
-
-
+const name1 = ref('')
+const now_active = name => {
+  // console.log(name)
+  name1.value = name
+}
 </script>
 
 <template>
-    <div class="app-header-sticky" :class="{ show: y > 78 }">
-        <div class="container">
-            <RouterLink class="logo" to="/" />
-            <!-- 导航区域 -->
-            <ul class="app-header-nav">
-                <li class="home">
-                    <RouterLink to="/Layout">首页</RouterLink>
-                </li>
-                <li class="home" v-for="v in d_layout.navList" :key="v.id">
-                    <RouterLink active-class="active" :to="`/category/${v.id}`">{{ v.name }}</RouterLink>
-                </li>
-            </ul>
-            <!-- <LayoutHeaderUl /> -->
-            <div class="right">
-                <RouterLink to="/">品牌</RouterLink>
-                <RouterLink to="/">专题</RouterLink>
-            </div>
-        </div>
+  <div class="app-header-sticky" :class="{ show: y > 78 }">
+    <div class="container">
+      <RouterLink class="logo" to="/" />
+      <!-- 导航区域 -->
+      <ul class="app-header-nav">
+        <li class="home">
+          <RouterLink :active-class="name1 === '首页' ? 'active' : ''" to="/Layout" @click="now_active('首页')">首页</RouterLink>
+        </li>
+        <li class="home" v-for="v in d_layout.navList" :key="v.id">
+          <RouterLink :active-class="name1 === ('首页' || '品牌' || '专题') ? '' : 'active'" :to="`/Layout/category/${v.id}`" @click="now_active(v.name)">{{ v.name }}</RouterLink>
+        </li>
+      </ul>
+      <!-- <LayoutHeaderUl /> -->
+      <div class="right">
+        <RouterLink :active-class="name1 === '品牌' ? 'active' : ''" @click="now_active('品牌')" to="/Layout">品牌</RouterLink>
+        <RouterLink :active-class="name1 === '专题' ? 'active' : ''" @click="now_active('专题')" to="/Layout">专题</RouterLink>
+      </div>
     </div>
+  </div>
 </template>
 
-
-<style scoped lang='scss'>
+<style scoped lang="scss">
 .app-header-sticky {
-    width: 100%;
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  background-color: #fff;
+  border-bottom: 1px solid #e4e4e4;
+  // 此处为关键样式!!!
+  // 状态一：往上平移自身高度 + 完全透明
+  transform: translateY(-100%);
+  // 透明度 0 => 全透明
+  opacity: 0;
+
+  // 状态二：移除平移 + 完全不透明
+  &.show {
+    transition: all 0.3s linear;
+    transform: none;
+    opacity: 1;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    width: 200px;
     height: 80px;
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 999;
-    background-color: #fff;
-    border-bottom: 1px solid #e4e4e4;
-    // 此处为关键样式!!!
-    // 状态一：往上平移自身高度 + 完全透明
-    transform: translateY(-100%);
-    // 透明度 0 => 全透明
-    opacity: 0;
+    background: url('@/assets/images/logo.png') no-repeat right 2px;
+    background-size: 160px auto;
+  }
 
-    // 状态二：移除平移 + 完全不透明
-    &.show {
-        transition: all 0.3s linear;
-        transform: none;
-        opacity: 1;
+  .right {
+    width: 220px;
+    display: flex;
+    text-align: center;
+    padding-left: 40px;
+    border-left: 2px solid $xtxColor;
+
+    a {
+      width: 38px;
+      margin-right: 40px;
+      font-size: 16px;
+      line-height: 32px;
+      height: 32px;
+      display: inline-block;
+
+      &:hover {
+        color: $xtxColor;
+        border-bottom: 1px solid $xtxColor;
+      }
     }
-
-    .container {
-        display: flex;
-        align-items: center;
+    .active {
+      color: $xtxColor;
+      border-bottom: 1px solid $xtxColor;
     }
-
-    .logo {
-        width: 200px;
-        height: 80px;
-        background: url("@/assets/images/logo.png") no-repeat right 2px;
-        background-size: 160px auto;
-    }
-
-    .right {
-        width: 220px;
-        display: flex;
-        text-align: center;
-        padding-left: 40px;
-        border-left: 2px solid $xtxColor;
-
-        a {
-            width: 38px;
-            margin-right: 40px;
-            font-size: 16px;
-            line-height: 1;
-
-            &:hover {
-                color: $xtxColor;
-            }
-        }
-    }
+  }
 }
 
 .app-header {
-    background: #fff;
+  background: #fff;
 
-    .container {
-        display: flex;
-        align-items: center;
+  .container {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    width: 200px;
+
+    a {
+      display: block;
+      height: 132px;
+      width: 100%;
+      text-indent: -9999px;
+      background: url('@/assets/images/logo.png') no-repeat center 18px / contain;
+    }
+  }
+
+  .search {
+    width: 170px;
+    height: 32px;
+    position: relative;
+    border-bottom: 1px solid #e7e7e7;
+    line-height: 32px;
+
+    .icon-search {
+      font-size: 18px;
+      margin-left: 5px;
     }
 
-    .logo {
-        width: 200px;
-
-        a {
-            display: block;
-            height: 132px;
-            width: 100%;
-            text-indent: -9999px;
-            background: url('@/assets/images/logo.png') no-repeat center 18px / contain;
-        }
+    input {
+      width: 140px;
+      padding-left: 5px;
+      color: #666;
     }
+  }
 
+  .cart {
+    width: 50px;
 
-    .search {
-        width: 170px;
-        height: 32px;
-        position: relative;
-        border-bottom: 1px solid #e7e7e7;
-        line-height: 32px;
+    .curr {
+      height: 32px;
+      line-height: 32px;
+      text-align: center;
+      position: relative;
+      display: block;
 
-        .icon-search {
-            font-size: 18px;
-            margin-left: 5px;
-        }
+      .icon-cart {
+        font-size: 22px;
+      }
 
-        input {
-            width: 140px;
-            padding-left: 5px;
-            color: #666;
-        }
+      em {
+        font-style: normal;
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 1px 6px;
+        line-height: 1;
+        background: $helpColor;
+        color: #fff;
+        font-size: 12px;
+        border-radius: 10px;
+        font-family: Arial;
+      }
     }
-
-    .cart {
-        width: 50px;
-
-        .curr {
-            height: 32px;
-            line-height: 32px;
-            text-align: center;
-            position: relative;
-            display: block;
-
-            .icon-cart {
-                font-size: 22px;
-            }
-
-            em {
-                font-style: normal;
-                position: absolute;
-                right: 0;
-                top: 0;
-                padding: 1px 6px;
-                line-height: 1;
-                background: $helpColor;
-                color: #fff;
-                font-size: 12px;
-                border-radius: 10px;
-                font-family: Arial;
-            }
-        }
-    }
+  }
 }
 
 .app-header-nav {
-    width: 820px;
-    display: flex;
-    padding-left: 40px;
-    position: relative;
-    z-index: 998;
+  width: 820px;
+  display: flex;
+  padding-left: 40px;
+  position: relative;
+  z-index: 998;
 
-    li {
-        margin-right: 40px;
-        width: 38px;
-        text-align: center;
+  li {
+    margin-right: 40px;
+    width: 38px;
+    text-align: center;
 
-        a {
-            font-size: 16px;
-            line-height: 32px;
-            height: 32px;
-            display: inline-block;
+    a {
+      font-size: 16px;
+      line-height: 32px;
+      height: 32px;
+      display: inline-block;
 
-            &:hover {
-                color: $xtxColor;
-                border-bottom: 1px solid $xtxColor;
-            }
-        }
-
-        .active {
-            color: $xtxColor;
-            border-bottom: 1px solid $xtxColor;
-        }
+      &:hover {
+        color: $xtxColor;
+        border-bottom: 1px solid $xtxColor;
+      }
     }
+
+    .active {
+      color: $xtxColor;
+      border-bottom: 1px solid $xtxColor;
+    }
+  }
 }
 </style>

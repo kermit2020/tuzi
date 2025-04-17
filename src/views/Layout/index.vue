@@ -17,7 +17,7 @@ import layout_footer from './layout_file/LayoutFooter.vue'
 
 // 简单的调试信息
 // console.log('layout_header:', layout_header)
-console.log('layout_fixed:', layout_fixed)
+// console.log('layout_fixed:', layout_fixed)
 </script>
 
 <style scoped>
