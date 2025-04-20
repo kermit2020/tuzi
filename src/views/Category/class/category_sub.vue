@@ -2,10 +2,10 @@
   <div class="sub-list">
     <h3>全部分类</h3>
     <ul>
-      <li v-for="i in d_category.cateList.children" :key="i.id">
-        <RouterLink to="/">
-          <img :src="i.picture" />
-          <p>{{ i.name }}</p>
+      <li v-for="v1 in d_category.cateList.children" :key="v1.id">
+        <RouterLink :to="`/Layout/category/sub/${v1.id}`" class="category-item">
+          <img :src="v1.picture" />
+          <p>{{ v1.name }}</p>
         </RouterLink>
       </li>
     </ul>
