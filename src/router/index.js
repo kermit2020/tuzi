@@ -35,6 +35,12 @@ const router = createRouter({
           component: () => {
             return import(`@/views/Sub/index.vue`)
           }
+        },
+        {
+          path: 'detail/:id',
+          component: () => {
+            return import(`@/views/Detail/index.vue`)
+          }
         }
       ]
     },
@@ -123,7 +129,11 @@ const router = createRouter({
     //   // which is lazy-loaded when the route is visited.
     //   component: () => import('../views/AboutView.vue'),
     // },
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    //滚动条置顶
+    return { top: 0 }
+  }
 })
 
 export default router

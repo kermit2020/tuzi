@@ -4,7 +4,7 @@
   <home_repanel title="新鲜好物" subtitle="新鲜出炉 品质靠谱">
     <ul class="goods-list">
     <li v-for="(v,i) in d_home.newList" :key="v.id">
-      <RouterLink to="/">
+      <RouterLink :to="`/Layout/detail/${v.id}`">
         <img v-img-lazy="v.picture" alt="" />
         <p class="name">{{ v.name }}</p>
         <p class="price">&yen;{{ v.price }}</p>

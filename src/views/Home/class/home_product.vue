@@ -2,7 +2,7 @@
   <div class="home-product">
     <home_repanel :title="v1.name" v-for="(v1, i1) in d_home.goodsList" :key="v1.id">
       <div class="box">
-        <RouterLink class="cover" to="/">
+        <RouterLink class="cover" :to="`/Layout/detail/${v1.id}`">
           <img v-img-lazy="i1 === 3 ? 'http://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-05-06/d38a73b8-cd03-48aa-a60b-e7c4e16667ed.png' : v1.picture" />
           <strong class="label">
             <span>{{ v1.name }}馆</span>

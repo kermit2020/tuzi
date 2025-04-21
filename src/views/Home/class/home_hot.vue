@@ -10,7 +10,7 @@ d_home.getHotList()
   <home_repanel title="人气推荐" subtitle="人气爆款 不容错过">
       <ul class="goods-list">
         <li v-for="(v,i) in d_home.hotList" :key="v.id">
-          <RouterLink to="/">
+          <RouterLink :to="`/Layout/detail/${v.id}`">
             <img v-img-lazy="v.picture" alt="">
             <p class="name">{{ v.title }}</p>
             <p class="desc">{{ v.alt }}</p>

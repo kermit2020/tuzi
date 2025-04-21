@@ -12,14 +12,14 @@ const d_layout = s_layout()
   <div class="home-category">
     <ul class="menu">
       <li v-for="(v, i) in d_layout.navList" :key="v">
-        <RouterLink to="/">{{v.name}}</RouterLink>
-        <RouterLink v-for="(v1,i1) in v.children.slice(0,2)" :key="i1" to="/">{{v1.name}}</RouterLink>
+        <RouterLink :to="{ path: `/Layout/category/${v.id}`}">{{v.name}}</RouterLink>
+        <RouterLink v-for="(v1,i1) in v.children.slice(0,2)" :key="i1" :to="{ path: `/Layout/category/${v.id}`}">{{v1.name}}</RouterLink>
         <!-- 弹层layer位置 -->
         <div class="layer">
           <h4>分类推荐 <small>根据您的购买或浏览记录推荐</small></h4>
           <ul>
             <li v-for="(v2,i2) in v.goods" :key="i2">
-              <RouterLink to="/">
+              <RouterLink :to="`/Layout/detail/${v2.id}`">
                 <img alt="" :src="v2.picture" />
                 <div class="info">
                   <p class="name ellipsis-2">
