@@ -94,7 +94,11 @@
               </div>
             </div>
             <!-- 24热榜+专题推荐 -->
-            <div class="goods-aside"></div>
+            <div class="goods-aside">
+              <hot title="周日榜单" :goods="hot1"/>
+              <hot title="24小时热榜" :goods="hot2"/>
+              
+            </div>
           </div>
         </div>
       </div>
@@ -106,12 +110,20 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { s_detail } from '@/stores/detail'
+import hot from '@/components/_self/hot.vue'
 const route = useRoute()
 const d_detail = s_detail()
 const goods = ref({})
+const hot1 = ref({})
+const hot2 = ref({})
 onMounted(async () => {
   await d_detail.getDetailList(route.params.id)
   goods.value = d_detail.detailList
+  await d_detail.getHotList(route.params.id,1,6)
+  hot1.value = d_detail.hotList
+  await d_detail.getHotList(route.params.id,2,12)
+  hot2.value = d_detail.hotList
+  // console.log(hot1.value, hot2.value)
 })
 
 </script>
