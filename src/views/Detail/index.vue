@@ -15,7 +15,7 @@
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-
+              <goods_magnifier :imageList="goods.mainPictures"/>
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
@@ -110,6 +110,8 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { s_detail } from '@/stores/detail'
+import goods_magnifier from '@/components/_out/goods_magnifier.vue'
+
 import hot from '@/components/_self/hot.vue'
 const route = useRoute()
 const d_detail = s_detail()
