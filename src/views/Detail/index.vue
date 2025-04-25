@@ -64,7 +64,7 @@
                 </dl>
               </div>
               <!-- sku组件 -->
-
+              <sku :goods="goods" @change="skuChange"/>
               <!-- 数据组件 -->
 
               <!-- 按钮组件 -->
@@ -110,7 +110,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { s_detail } from '@/stores/detail'
-import goods_magnifier from '@/components/_out/goods_magnifier.vue'
+// import goods_magnifier from '@/components/_out/goods_magnifier.vue'
 
 import hot from '@/components/_self/hot.vue'
 const route = useRoute()
@@ -127,6 +127,9 @@ onMounted(async () => {
   hot2.value = d_detail.hotList
   // console.log(hot1.value, hot2.value)
 })
+const skuChange = (sku) => {
+  console.log(sku)
+}
 
 </script>
 
