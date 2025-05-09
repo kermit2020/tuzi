@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { getCate } from "@/apis/category";
 
-export const s_category = defineStore("s_category", (id) => {
+export const s_category = defineStore("s_category", () => {
   // 导航栏数据
   const cateList = ref({});
   const getCateList = async (id) => {

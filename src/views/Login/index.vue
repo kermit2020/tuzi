@@ -55,6 +55,13 @@
 
 <script setup>
 import { ref } from 'vue'
+import { s_login } from '@/stores/login'
+
+import { ElMessage } from 'element-plus'
+import { useRouter } from 'vue-router'
+//router需在异步外调用
+const router = useRouter()
+const d_login = s_login()
 //账号绑定
 const form = ref({
   account: '',
@@ -86,14 +93,22 @@ const rules = {
 }
 //登录按钮校验
 const subBtn = () => {
-  formRef.value.validate(valid => {
+  //测试账号id:xiaotuxian001;密码:123456
+  formRef.value.validate(async valid => {
     if (valid) {
-      alert('登录成功')
+      await d_login.getUserList(form.value)
+      if (d_login.userList.id) {
+        ElMessage({
+          message: '登录成功',
+          type: 'success'
+        })
+        router.replace('/Layout')
+      }
     } else {
       console.log('error submit!!')
       return false
     }
-  }) 
+  })
 }
 </script>
 
