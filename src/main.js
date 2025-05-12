@@ -8,11 +8,15 @@ import { componentPlugin } from './components/_out'
 
 import App from './App.vue'
 import router from './router'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+
 
 const app = createApp(App)
 
-
-app.use(createPinia())
+const pinia = createPinia()
+// pinia持久化插件
+pinia.use(piniaPluginPersistedstate)
+app.use(pinia)
 app.use(router)
 //图片懒加载
 app.use(lazyPlugin)
