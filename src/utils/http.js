@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+// import { s_login } from '@/stores/login'
+// const d_login = s_login()
 
 const http = axios.create({
   baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
@@ -9,6 +11,12 @@ const http = axios.create({
 http.interceptors.request.use(
   config => {
     // config.headers.Authorization = `Bearer ${store.state.user.token}`  // 假设你有一个名为 user 的模块，其中包含一个名为 token 的属性
+    const user = JSON.parse(window.sessionStorage.getItem('s_login'))?.userList
+    // const user = d_login.userList
+    const token = user?.token
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
     return config
   },
   error => {

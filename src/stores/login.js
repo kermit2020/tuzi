@@ -19,13 +19,17 @@ export const s_login = defineStore(
         return flase
       }
     }
-    return { userList, getUserList }
+    const clearUserList = () => {
+      userList.value = {}
+    }
+    return { userList, getUserList, clearUserList }
   },
   //添加持久化设定__默认localStorage
   { persist: [
     {
       // pick: ['userList'],
       storage: sessionStorage,
+      // storage: localStorage,
     }
   
   ]}

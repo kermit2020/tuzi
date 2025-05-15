@@ -36,14 +36,14 @@ const d_login = s_login()
 // const userStore = useUserStore()
 // const router = useRouter()
 
-// const confirm = () => {
-//     console.log('用户要登陆了！');
-//     // 退出登录业务逻辑实现
-//     // 1. 清除用户信息 触发action
-//     userStore.clearUserInfo()
-//     // 2. 跳转到登录页
-//     router.push('/login')
-// }
+const confirm = () => {
+    console.log('用户要登陆了！');
+    // 退出登录业务逻辑实现
+    // 1. 清除用户信息 触发action
+    d_login.clearUserList()
+    // 2. 跳转到登录页
+    router.push('/login')
+}
 
 </script>
 
