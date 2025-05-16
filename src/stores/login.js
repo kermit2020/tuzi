@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { getUser } from '@/apis/login'
 
+
 export const s_login = defineStore(
   's_login',
   () => {

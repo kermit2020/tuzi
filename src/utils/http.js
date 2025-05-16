@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-// import { s_login } from '@/stores/login'
-// const d_login = s_login()
+
+
+
 
 const http = axios.create({
   baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
@@ -35,6 +36,15 @@ http.interceptors.response.use(
       message: error.response.data.msg || '请求失败',
       duration: 1500
     })
+    //token失效401处理
+    if (error.response.status === 401) {
+      import('@/stores/login').then(module => {
+        module.s_login().clearUserList()
+        import('@/router').then(rmodule => {
+          rmodule.router.push('/login')
+        })
+      })
+    }
 
     return Promise.reject(error)
   }

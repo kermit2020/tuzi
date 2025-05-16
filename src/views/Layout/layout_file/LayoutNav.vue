@@ -32,9 +32,9 @@
 import { s_login } from '@/stores/login';
 const d_login = s_login()
 // import { useUserStore } from '@/stores/userStore';
-// import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 // const userStore = useUserStore()
-// const router = useRouter()
+const router = useRouter()
 
 const confirm = () => {
     console.log('用户要登陆了！');
