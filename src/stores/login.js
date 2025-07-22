@@ -6,7 +6,7 @@ import { getUser } from '@/apis/login'
 export const s_login = defineStore(
   's_login',
   () => {
-    // 导航栏数据
+    // 用户数据
     const userList = ref({})
 
     const getUserList = async data => {

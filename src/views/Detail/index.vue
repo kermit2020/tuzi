@@ -1,12 +1,12 @@
 <template>
   <div class="xtx-goods-page">
     <div class="container" v-if="goods?.categories?.length">
-      <div class="bread-container" >
+      <div class="bread-container">
         <el-breadcrumb separator=">">
           <el-breadcrumb-item :to="{ path: '/Layout' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item :to="{ path: `/Layout/category/${goods?.categories?.[1].id}` }">{{ goods?.categories?.[1].name }} </el-breadcrumb-item>
           <el-breadcrumb-item :to="{ path: `/Layout/category/sub/${goods?.categories?.[0].id}` }">{{ goods?.categories?.[0].name }}</el-breadcrumb-item>
-          <el-breadcrumb-item>{{goods?.name}}</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ goods?.name }}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
       <!-- 商品信息 -->
@@ -15,38 +15,38 @@
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-              <goods_magnifier :imageList="goods.mainPictures"/>
+              <goods_magnifier :imageList="goods.mainPictures" />
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
                   <p>销量人气</p>
-                  <p>{{goods.salesCount}}</p>
+                  <p>{{ goods.salesCount }}</p>
                   <p><i class="iconfont icon-task-filling"></i>销量人气</p>
                 </li>
                 <li>
                   <p>商品评价</p>
-                  <p>{{goods.commentCount}}</p>
+                  <p>{{ goods.commentCount }}</p>
                   <p><i class="iconfont icon-comment-filling"></i>查看评价</p>
                 </li>
                 <li>
                   <p>收藏人气</p>
-                  <p>{{goods.collectCount}}</p>
+                  <p>{{ goods.collectCount }}</p>
                   <p><i class="iconfont icon-favorite-filling"></i>收藏商品</p>
                 </li>
                 <li>
                   <p>品牌信息</p>
-                  <p>{{goods?.brand?.name}}</p>
+                  <p>{{ goods?.brand?.name }}</p>
                   <p><i class="iconfont icon-dynamic-filling"></i>品牌主页</p>
                 </li>
               </ul>
             </div>
             <div class="spec">
               <!-- 商品信息区 -->
-              <p class="g-name">{{goods?.name}}</p>
-              <p class="g-desc">{{goods?.desc}}</p>
+              <p class="g-name">{{ goods?.name }}</p>
+              <p class="g-desc">{{ goods?.desc }}</p>
               <p class="g-price">
-                <span>{{goods.price}}</span>
-                <span>{{goods.oldPrice}}</span>
+                <span>{{ goods.price }}</span>
+                <span>{{ goods.oldPrice }}</span>
               </p>
               <div class="g-service">
                 <dl>
@@ -64,12 +64,15 @@
                 </dl>
               </div>
               <!-- sku组件 -->
-              <sku :goods="goods" @change="skuChange"/>
+              <sku :goods="goods" @change="skuChange" />
               <!-- 数据组件 -->
+
+              <el-input-number v-model="count" @change="countChange" :min="1" precision="0"></el-input-number>
 
               <!-- 按钮组件 -->
               <div>
-                <el-button size="large" class="btn"> 加入购物车 </el-button>
+                <el-button size="large" class="btn" @click="addCart"> 加入购物车 </el-button>
+
               </div>
             </div>
           </div>
@@ -84,20 +87,19 @@
                   <!-- 属性 -->
                   <ul class="attrs">
                     <li v-for="item in goods.details.properties" :key="item.value">
-                      <span class="dt">{{item.name}}</span>
-                      <span class="dd">{{item.value}}</span>
+                      <span class="dt">{{ item.name }}</span>
+                      <span class="dd">{{ item.value }}</span>
                     </li>
                   </ul>
                   <!-- 图片 -->
-                   <img v-for="img in goods.details.pictures" :key="img" :src="img" alt="" />
+                  <img v-for="img in goods.details.pictures" :key="img" :src="img" alt="" />
                 </div>
               </div>
             </div>
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
-              <hot title="周日榜单" :goods="hot1"/>
-              <hot title="24小时热榜" :goods="hot2"/>
-              
+              <hot title="周日榜单" :goods="hot1" />
+              <hot title="24小时热榜" :goods="hot2" />
             </div>
           </div>
         </div>
@@ -110,27 +112,60 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { s_detail } from '@/stores/detail'
+import { s_cart } from "@/stores/cart";
 // import goods_magnifier from '@/components/_out/goods_magnifier.vue'
 
 import hot from '@/components/_self/hot.vue'
 const route = useRoute()
 const d_detail = s_detail()
+const d_cart = s_cart()
 const goods = ref({})
 const hot1 = ref({})
 const hot2 = ref({})
+
 onMounted(async () => {
   await d_detail.getDetailList(route.params.id)
   goods.value = d_detail.detailList
-  await d_detail.getHotList(route.params.id,1,6)
+  await d_detail.getHotList(route.params.id, 1, 6)
   hot1.value = d_detail.hotList
-  await d_detail.getHotList(route.params.id,2,12)
+  await d_detail.getHotList(route.params.id, 2, 12)
   hot2.value = d_detail.hotList
   // console.log(hot1.value, hot2.value)
 })
-const skuChange = (sku) => {
-  console.log(sku)
-}
+let skuObj = {}
 
+const skuChange = sku => {
+  console.log(sku)
+  skuObj = sku
+}
+//count组件
+let count = ref(1)
+const countChange = val => {
+  console.log('数量变化', val)
+  count.value = val
+}
+const addCart = () => {
+  console.log('加入购物车', skuObj, count.value);
+  
+  if(skuObj.skuId){
+    //添加购物车数据
+    d_cart.addCart({
+      id: goods.value.id,
+      name: goods.value.name,
+      pictures: goods.value.mainPictures[0],
+      price: goods.value.price,
+      count: count.value,
+      skuId: skuObj.skuId,
+      attributes: skuObj.specsText,
+      selected:true
+    })
+  }else{
+    ElMessage({
+      type: 'warning',
+      message: '请选择商品规格'
+    })
+  }
+}
 </script>
 
 <style scoped lang="scss">

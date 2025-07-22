@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { getSub ,getTab} from '@/apis/sub'
 
 export const s_sub = defineStore('s_sub', () => {
-  // 导航栏数据
+  // 子页面数据
   const subList = ref({})
   const tabList = ref({})
   const getSubList = async id => {
