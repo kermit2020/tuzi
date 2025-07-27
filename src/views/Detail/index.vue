@@ -152,7 +152,7 @@ const addCart = () => {
     d_cart.addCart({
       id: goods.value.id,
       name: goods.value.name,
-      pictures: goods.value.mainPictures[0],
+      picture: goods.value.mainPictures[0],
       price: goods.value.price,
       count: count.value,
       skuId: skuObj.skuId,

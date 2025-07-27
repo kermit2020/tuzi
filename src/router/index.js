@@ -10,11 +10,10 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: '/', redirect: '/home', component: app },
-    
-    
+
     {
       path: '/Layout',
-     
+
       component: Layout,
       children: [
         {
@@ -41,6 +40,12 @@ const router = createRouter({
           component: () => {
             return import(`@/views/Detail/index.vue`)
           }
+        },
+        {
+          path: 'CartList',
+          component: () => {
+            return import(`@/views/CartList/index.vue`)
+          }
         }
       ]
     },
@@ -50,7 +55,8 @@ const router = createRouter({
       component: () => {
         return import(`@/views/Login/index.vue`)
       }
-    },{
+    },
+    {
       path: '/home',
       // name: 'home',
       component: home,
@@ -103,13 +109,13 @@ const router = createRouter({
         {
           path: '/item/5',
 
-          redirect: '/Layout',
+          redirect: '/Layout'
           // component: route => {
           //   return import(`@/views/Layout/index.vue`)
           // }
         }
       ]
-    },
+    }
     // {
     //   path: '/item/:id',
     //   name: 'item',
@@ -130,7 +136,7 @@ const router = createRouter({
     //   component: () => import('../views/AboutView.vue'),
     // },
   ],
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     //滚动条置顶
     return { top: 0 }
   }
