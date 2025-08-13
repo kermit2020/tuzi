@@ -6,6 +6,7 @@ const singleChange = (i, selected) => {
   d_cart.singleChange(i.skuId, selected)
   console.log('单选复选框变化', i, selected)
 }
+
 </script>
 
 <template>
@@ -80,7 +81,7 @@ const singleChange = (i, selected) => {
           共{{ d_cart.allCount }}件商品，已选择 {{ d_cart.selectedCount }} 件，商品合计： <span class="red">¥ {{ d_cart.selectedPrice.toFixed(2) }} </span>
         </div>
         <div class="total">
-          <el-button size="large" type="primary">下单结算</el-button>
+          <el-button size="large" type="primary" @click="$router.push('/Layout/Checkout')">下单结算</el-button>
         </div>
       </div>
     </div>

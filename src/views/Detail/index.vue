@@ -166,6 +166,9 @@ const addCart = () => {
     })
   }
 }
+
+
+
 </script>
 
 <style scoped lang="scss">

@@ -5,7 +5,7 @@
         <h1 class="logo">
           <RouterLink to="/">小兔鲜</RouterLink>
         </h1>
-        <RouterLink class="entry" to="/">
+        <RouterLink class="entry" to="/Layout">
           进入网站首页
           <i class="iconfont icon-angle-right"></i>
           <i class="iconfont icon-angle-right"></i>
