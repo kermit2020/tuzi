@@ -163,6 +163,7 @@ export default {
 }
 
 .goods-sku {
+@apply flex;
   padding-left: 10px;
   padding-top: 20px;
 
@@ -177,13 +178,15 @@ export default {
     }
 
     dd {
-      flex: 1;
+      @apply flex flex-wrap;
+      
       color: #666;
 
       >img {
-        width: 50px;
-        height: 50px;
-        margin-bottom: 4px;
+        @apply w-50px h-50px mb-4px ;
+        // width: 50px;
+        // height: 50px;
+        // margin-bottom: 4px;
         @include sku-state-mixin;
       }
 

@@ -1,11 +1,13 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+// import { useUserStore } from "@/stores/userStore";
 
 
 
 
 const http = axios.create({
-  baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
+  // baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
+    baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
   timeout: 5000
 })
 //axios拦截器
@@ -15,10 +17,20 @@ http.interceptors.request.use(
     const user = JSON.parse(window.sessionStorage.getItem('s_login'))?.userList
     // const user = d_login.userList
     const token = user?.token
+    console.log('token', token);
+    
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
     return config
+    //  // 1. 从pinia里面获取token数据
+    // const userStore = useUserStore()
+    // // 2. 按照后端的要求拼接token数据
+    // const token = userStore.userInfo.token
+    // if (token) {
+    //     config.headers.Authorization = `Bearer ${token}`
+    // }
+    // return config
   },
   error => {
     return Promise.reject(error)

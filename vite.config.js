@@ -7,8 +7,9 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import WindiCSS from 'vite-plugin-windicss'
+
  
-import tailwindcss from'@tailwindcss/vite'
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -22,13 +23,7 @@ export default defineConfig({
       resolvers: [ElementPlusResolver({ importStyle: 'sass' })]
     }),
     WindiCSS(),
-    //   tailwindcss(
-    //   //   {
-    //   //   config: {
-    //   //     content: ['./src/**/*.{html,js,vue}'],
-    //   //   },
-    //   // }
-    // ),
+    
   ],
   resolve: {
     alias: {
