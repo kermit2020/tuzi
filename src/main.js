@@ -1,49 +1,33 @@
+/* 全局样式 */
 import '@/styles/common.scss'
 import 'virtual:windi.css'
 import 'element-plus/theme-chalk/el-message.css'
+/* 方法 */
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-
-import { lazyPlugin } from '@/directions/lazy.js'
+/* 自定义插件 */
+import { lazyPlugin } from '@/_directions/lazy.js'
 import { componentPlugin } from './components/_out'
-
+import { mockPlugin } from '@/_mock/mock' //mock自动化
+/* 全局插件 */
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+/* 全局组件 */
 import App from './App.vue'
 import router from './router'
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-//挂载mock ==start
-import { lowCode, rabbit } from '@/_mock/mock'
+
+
+/* 变量声明 */
 const app = createApp(App)
-// 批量注册 lowCode 目录下的 js
-Object.entries(lowCode).forEach(([filename, importFn]) => {
-  importFn().then(mod => {
-    const comp = mod.default || mod
-    const compName = comp.name || filename.replace(/\.\/(.*)\.js$/g, '$1')
-    app.component(compName, comp)
-  })
-})
-// Object.values(lowCode).forEach(importFn => {
-//   importFn() // 这样会执行 table.js 里的 Mock.mock
-// })
-
-// 批量注册 rabbit 目录下的 js
-Object.entries(rabbit).forEach(([filename, importFn]) => {
-  importFn().then(mod => {
-    const comp = mod.default || mod
-    const compName = comp.name || filename.replace(/\.\/(.*)\.js$/g, '$1')
-    app.component(compName, comp)
-  })
-})
-// 挂载全局组件==end
-
-
-
 const pinia = createPinia()
-// pinia持久化插件
-pinia.use(piniaPluginPersistedstate)
+
+
+/* 挂载 */
+pinia.use(piniaPluginPersistedstate) // pinia持久化插件
+
 app.use(pinia)
 app.use(router)
-//图片懒加载
-app.use(lazyPlugin)
-//全局组件
-app.use(componentPlugin)
+app.use(lazyPlugin)//图片懒加载
+app.use(componentPlugin)//全局组件
+app.use(mockPlugin)//mock自动化
+
 app.mount('#app')
